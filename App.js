@@ -15,15 +15,15 @@ import {styles} from './styles/front' /* Objecto estilo importado */
       this.calcularIMC = this.calcularIMC.bind(this);
     }
 
-    setPeso = peso_ =>{
+    setPeso = peso_ =>{ /*Cambia el valor del peso que recibe con el evento onchangetext del input*/
       this.setState({peso: peso_});
     }
 
-    setAltura = altura_ =>{
+    setAltura = altura_ =>{ /*Cambia el valor de la altura que recibe con el evento onchangetext del input*/
       this.setState({altura: altura_});
     }
 
-    setResultado = resultado_ =>{
+    setResultado = resultado_ =>{ /*Es llamado para cambiar el estado del resultado según el imc obtenido*/
       this.setState({resultado: resultado_});
     }
 
@@ -32,17 +32,17 @@ import {styles} from './styles/front' /* Objecto estilo importado */
     }
 
     
-    calcularIMC = () =>{
+    calcularIMC = () =>{ /*Función que es llamada con el onPress de Buttom*/
 
-      if(!isNaN(this.state.peso)){
+      if(!isNaN(this.state.peso)){ /*Parseamos el peso en caso de que no sea int*/
         parseInt(this.state.peso);
       }
           
-      let imc = this.state.peso / Math.pow(this.state.altura,2);
+      let imc = this.state.peso / Math.pow(this.state.altura,2); /*Formula para obtener el imc*/
 
-      if(this.state.altura>0 && this.state.peso>0){
+      if(this.state.altura>0 && this.state.peso>0){ /*Si el peso y la altura no tienen valor no habrá resultado*/
         imc<18.5 ? this.setResultado('Peso insuficiente') :
-        imc>=18.5 && imc < 25 ?  this.setResultado('Normopeso') :
+        imc>=18.5 && imc < 25 ?  this.setResultado('Normopeso') : /*Según el imc obtenito se dará un valor diferente al resultado que saldrá por pantalla*/
         imc>=25 && imc < 27 ? this.setResultado('Sobrepeso grado I') : 
         imc>=27 && imc < 30 ? this.setResultado('Sobrepeso grado II') : 
         imc>=30 && imc < 35 ? this.setResultado('Obesidad de tipo I') :
@@ -54,7 +54,7 @@ import {styles} from './styles/front' /* Objecto estilo importado */
         this.setResultado('');
       }
 
-      imc > 27 && imc < 40 ? this.setColor('orange') : 
+      imc > 27 && imc < 40 ? this.setColor('orange') : /*Si el imc esta comprendido ente 28 y 39 saldrá naranja , por defecto es verde y si supera o iguala los 40 es de color rojo*/
       imc >= 40 ? this.setColor('red') : this.setColor('green')
 
     }
